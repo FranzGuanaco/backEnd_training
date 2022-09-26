@@ -1,56 +1,30 @@
 <?php
 
-$mysqlDsn = 'mysql: host=localhost; dbname=training1';
+$mysqlDsn = 'mysql: host=localhost; dbname=githubb';
 
-
-$table ="games";
 
 try {
     $pdo = new PDO($mysqlDsn, $db_password = 'root', $db_user = 'root');
 
-    $search = 'Super%';
-    
-    $sql = 'SELECT games.name, games.description from games where name like ?';
+    /*$table = "CREATE TABLE GIoT (
+        Id INT NOT NULL AUTO_INCREMENT,
+        O VARCHAR (50) NOT NULL,
+        MM VARCHAR (50) NOT NULL, 
+        DATE INT,
+        PRIMARY KEY (Id))"; 
 
-   $pdoStatement = $pdo -> prepare($sql);
-   $pdoStatement -> bindParam(1, $search, PDO::PARAM_STR);
+    $pdo -> exec($table); */
 
-   if ($pdoStatement -> execute()){
-
+    $test = "DELETE FROM GIoT WHERE O = 'BONJOUR'" ;
    
-   while ($user = $pdoStatement -> fetch(PDO::FETCH_OBJ)){ // fetch object permet de preciser la classe qu'on utilise
+    foreach ( $pdo -> query($test) as $oh)
+    print $oh ['O'];
 
-        echo $user -> name;
-       // echo '<pre>';
-       // print_r ($user);
-       // echo '<pre>';
-    };  
-   }
 
-   else{
-    var_dump($pdoStatement -> errorInfo());
-   }
-
-    foreach($pdo -> query ($sql)as $test){
-        echo $test ['name'];
-    }
-  
 }
-    //$pdoStatement = $pdo -> prepare ($sql);
-  //  $pdoStatement -> bindValue(':search', $search, PDO::PARAM_STR) ;
+  
 
-  /* if ($pdo -> exec()){
-   echo 'ca marche';
-   }
-
-   else{
-    echo 'nop';
-
-   }} */
 
 catch(PDOException $e) {
 
-    echo 'rr';
-}
-
-echo memory_get_peak_usage();
+    echo 'rr';}
